@@ -87,6 +87,7 @@
   .day-card.vienne-day { border-top:2px solid var(--vienne); }
   .day-card.yellow-day { border-top:2px solid var(--yellow); }
   .vienne-tag { font-family:'DM Mono',monospace; font-size:8px; color:var(--vienne); letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px; opacity:.8; }
+  .vienne-inline { font-family:'DM Mono',monospace; font-size:8px; color:var(--vienne); letter-spacing:.04em; text-transform:uppercase; opacity:.85; }
   .day-name { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
   .day-badge { display:inline-block; font-size:11px; font-weight:600; padding:5px 8px; border-radius:6px; letter-spacing:.02em; width:100%; line-height:1.3; }
   .badge-cardio   { background:var(--cardio-bg);   color:var(--cardio);   border:1px solid rgba(14,122,138,.22); }
@@ -279,14 +280,12 @@
           <div class="day-note" data-i18n="note_mon">Evening · 25 min</div>
         </div>
         <div class="day-card vienne-day">
-          <div class="vienne-tag" data-i18n="vienne_tag">🚄 Vienna</div>
-          <div class="day-name" data-i18n="day_tue">Tue</div>
+          <div class="day-name"><span data-i18n="day_tue">Tue</span> <span class="vienne-inline" data-i18n="vienne_tag">🚄 Vienna</span></div>
           <div class="day-badge badge-rest" data-i18n="badge_recovery">Active recovery</div>
           <div class="day-note" data-i18n="note_tue">Walk · no workout</div>
         </div>
         <div class="day-card vienne-day">
-          <div class="vienne-tag" data-i18n="vienne_tag">🚄 Vienna</div>
-          <div class="day-name" data-i18n="day_wed">Wed</div>
+          <div class="day-name"><span data-i18n="day_wed">Wed</span> <span class="vienne-inline" data-i18n="vienne_tag">🚄 Vienna</span></div>
           <div class="day-badge badge-rest" data-i18n="badge_recovery">Active recovery</div>
           <div class="day-note" data-i18n="note_wed">Walk · no workout</div>
         </div>
@@ -302,7 +301,7 @@
           <div class="day-badge badge-strength" data-i18n="badge_core">Core strength</div>
           <div class="day-note" data-i18n="note_fri">Evening · 25 min</div>
         </div>
-        <div class="day-card yellow-day">
+        <div class="day-card">
           <div class="day-name" data-i18n="day_sat">Sat</div>
           <div class="day-badge badge-yellow" data-i18n="badge_sat">HIIT + Glutes</div>
           <div class="day-note" data-i18n="note_sat">Morning · 30 min ⭐</div>
