@@ -200,11 +200,12 @@
     .header-title { font-size:38px; }
     .header-sub { text-align:left; }
     .lang-bar { padding:8px 14px; }
-    .week-row-top,.week-row-bot { display:flex; flex-direction:column; gap:5px; grid-template-columns:unset; width:100%!important; }
-    .day-card { display:grid; grid-template-columns:40px 1fr; align-items:center; gap:8px; padding:8px 12px; text-align:left; border-radius:8px; }
-    .day-name { font-size:10px; margin-bottom:0; text-align:center; }
-    .day-badge { font-size:11px; padding:4px 8px; width:auto; }
-    .vienne-tag { grid-column:1/3; font-size:8px; margin-bottom:2px; }
+    .week-row-top { grid-template-columns:repeat(4,1fr); }
+    .week-row-bot { grid-template-columns:repeat(3,1fr); width:75%; margin:0 auto; }
+    .day-card { padding:10px 6px; }
+    .day-name { font-size:9px; margin-bottom:8px; }
+    .day-badge { font-size:10px; padding:4px 5px; }
+    .vienne-tag { font-size:7px; }
     .seance-row { padding:12px 14px; gap:10px; }
     .exo-name { font-size:12px; }
     .exo-sub  { font-size:11px; }
@@ -705,7 +706,11 @@
   </div></section>
 
   <section>
-    <div class="section-label" data-i18n="sec_sleep">Sleep management — key point</div>
+    <div class="section-label" style="cursor:pointer;" onclick="toggleSection('sleep-body','sleep-btn')">
+      <span data-i18n="sec_sleep">Sleep management — key point</span>
+      <button id="sleep-btn" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:5px;color:var(--yellow);padding:4px 10px;cursor:pointer;font-weight:600;margin-left:auto;" data-i18n="btn_open">+ Details</button>
+    </div>
+    <div id="sleep-body" style="display:none;">
     <div class="tips-grid">
       <div class="sleep-card sleep-yellow">
         <div class="sleep-icon">🌙</div>
@@ -729,10 +734,15 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 
   <section>
-    <div class="section-label" data-i18n="sec_tips">Key points</div>
+    <div class="section-label" style="cursor:pointer;" onclick="toggleSection('tips-body','tips-btn')">
+      <span data-i18n="sec_tips">Key points</span>
+      <button id="tips-btn" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:5px;color:var(--yellow);padding:4px 10px;cursor:pointer;font-weight:600;margin-left:auto;" data-i18n="btn_open">+ Details</button>
+    </div>
+    <div id="tips-body" style="display:none;">
     <div class="tips-grid">
       <div class="tip-card tip-yellow">
         <div class="tip-num">01</div>
@@ -765,6 +775,7 @@
         <div class="tip-body" data-i18n="t6b">−4 kg safely = 10–14 weeks. No quick fix. Belly and glutes are the last areas to change — stay the course.</div>
       </div>
     </div>
+    </div>
   </section>
 
 </div>
@@ -789,7 +800,7 @@ hu:{lang_label:"Nyelv",tagline1:"Test & Energia",tagline2:"Fogyás · Tónusnöv
 };
 
 
-let todayFilterOn = false;
+let todayFilterOn = true;
 function toggleTodayFilter() {
   todayFilterOn = !todayFilterOn;
   const btn = document.getElementById('today-btn');
@@ -823,6 +834,16 @@ function applyTodayFilter() {
   }
 }
 
+function toggleSection(bodyId, btnId) {
+  const body = document.getElementById(bodyId);
+  const btn  = document.getElementById(btnId);
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  const lang = document.documentElement.lang || 'en';
+  const d = T[lang] || T.en;
+  if (btn) btn.textContent = isOpen ? (d.btn_open || '+ Details') : (d.btn_close || '− Close');
+}
+
 function toggleNutrition() {
   const body = document.getElementById('nutri-body');
   const btn = document.getElementById('nutri-btn');
@@ -853,10 +874,12 @@ function setLang(lang) {
   const now = new Date();
   const loc = {en:'en-GB',fr:'fr-FR',hu:'hu-HU'}[lang]||'en-GB';
   document.getElementById('hdr-date').textContent = now.toLocaleDateString(loc,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-  // update nutri btn text
-  const nb = document.getElementById('nutri-btn');
-  const nbOpen = document.getElementById('nutri-body').style.display !== 'none';
-  if (nb) nb.textContent = nbOpen ? (d.btn_close||'− Close') : (d.btn_open||'+ Details');
+  // update collapsible btn texts
+  [['nutri-btn','nutri-body'],['sleep-btn','sleep-body'],['tips-btn','tips-body']].forEach(([bId,cId]) => {
+    const b = document.getElementById(bId);
+    const body = document.getElementById(cId);
+    if (b && body) b.textContent = body.style.display !== 'none' ? (d.btn_close||'− Close') : (d.btn_open||'+ Details');
+  });
   // update today btn
   const tb = document.getElementById('today-btn'); if(tb) tb.textContent = d.btn_today||'Today only';
   // update expand button texts for current open state
@@ -869,6 +892,9 @@ function setLang(lang) {
   });
 }
 setLang('en');
+// Apply today filter on load (active by default)
+document.getElementById('today-btn').classList.add('active');
+applyTodayFilter();
 </script>
 
 <script>
