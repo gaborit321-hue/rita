@@ -891,10 +891,13 @@ function setLang(lang) {
     }
   });
 }
-setLang('en');
-// Apply today filter on load (active by default)
-document.getElementById('today-btn').classList.add('active');
-applyTodayFilter();
+// Init on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  setLang('en');
+  const btn = document.getElementById('today-btn');
+  if (btn) btn.classList.add('active');
+  applyTodayFilter();
+});
 </script>
 
 <script>
