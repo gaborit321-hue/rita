@@ -1,0 +1,26 @@
+{
+  "name": "Program",
+  "short_name": "Program",
+  "description": "Rita's Programme — Body & Energy · Weight loss · Toning",
+  "start_url": "/rita/index.html",
+  "scope": "/rita/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0eff4",
+  "theme_color": "#f0eff4",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
