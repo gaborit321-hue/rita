@@ -167,18 +167,21 @@
 
 
   /* EXPAND / COLLAPSE */
-  .seance-row { cursor:pointer; align-items:start; }
-  .seance-row .row-top { display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; width:100%; }
-  .expand-btn { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.08em; color:var(--dim); background:none; border:1px solid var(--border2); border-radius:4px; padding:3px 7px; cursor:pointer; transition:all .18s; white-space:nowrap; flex-shrink:0; margin-left:8px; }
+  .seance-row { cursor:pointer; align-items:start; display:block !important; }
+  .seance-row .row-top { display:flex; flex-direction:column; gap:6px; width:100%; }
+  .row-top-header { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .row-top-header .sets-badge { font-size:18px; flex-shrink:0; }
+  .expand-btn { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.08em; color:var(--dim); background:none; border:1px solid var(--border2); border-radius:4px; padding:4px 9px; cursor:pointer; transition:all .18s; white-space:nowrap; flex-shrink:0; min-height:26px; }
   .expand-btn:hover { color:var(--text); border-color:var(--accent); }
-  .exo-detail { display:none; margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); line-height:1.75; }
+  .exo-detail { display:none; margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
   .exo-detail.open { display:block; animation:fadeUp .2s ease both; }
-  .exo-detail ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
-  .exo-detail ul li::before { content:'→ '; color:var(--accent); font-weight:600; }
+  .exo-detail ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .exo-detail ul li { font-size:13px; color:var(--text); line-height:1.6; padding-left:18px; position:relative; }
+  .exo-detail ul li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-weight:700; }
   .exo-detail ul li.cardio-li::before { color:var(--cardio); }
   .exo-detail ul li.yellow-li::before { color:var(--yellow); }
   .seance-row.yoga-row .exo-detail ul li::before { color:var(--yoga); }
-  .detail-note { margin-top:8px; font-size:11px; padding:6px 10px; background:var(--accent-bg); border:1px solid rgba(181,55,122,.15); border-radius:6px; color:var(--accent); }
+  .detail-note { margin-top:10px; font-size:12px; padding:8px 12px; background:var(--accent-bg); border:1px solid rgba(181,55,122,.15); border-radius:8px; color:var(--accent); line-height:1.55; }
   .detail-note.cardio-note { background:var(--cardio-bg); border-color:rgba(14,122,138,.2); color:var(--cardio); }
   .detail-note.yellow-note { background:var(--yellow-bg); border-color:var(--yellow-border); color:var(--yellow); }
 
@@ -342,14 +345,14 @@
       <!-- MON 1 -->
       <div class="seance-row strength-row" data-day="1" onclick="toggleDetail('d1')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_mon">MON · STRENGTH</span><span data-i18n="e1n">Slow sumo squats + Floor hip thrust</span></div>
-            <div class="exo-sub" data-i18n="e1s">Squat: 3s descent, explosive up · Hip thrust: 2s hold at top</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×4</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×4</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e1s">Squat: 3s descent, explosive up · Hip thrust: 2s hold at top</div>
         </div>
         <div class="exo-detail" id="d1">
           <ul>
@@ -363,14 +366,14 @@
       <!-- MON 2 -->
       <div class="seance-row strength-row" data-day="1" onclick="toggleDetail('d2')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_mon">MON · STRENGTH</span><span data-i18n="e2n">Reverse lunges + Donkey kickbacks</span></div>
-            <div class="exo-sub" data-i18n="e2s">Back knee 2cm from floor · 12 reps/side</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×3</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×3</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e2s">Back knee 2cm from floor · 12 reps/side</div>
         </div>
         <div class="exo-detail" id="d2">
           <ul>
@@ -384,14 +387,14 @@
       <!-- MON 3 -->
       <div class="seance-row strength-row" data-day="1" onclick="toggleDetail('d3')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_mon">MON · STRENGTH</span><span data-i18n="e3n">Single-leg glute bridge + Clamshell</span></div>
-            <div class="exo-sub" data-i18n="e3s">15 reps bridge / 20 reps clamshell per side</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×3</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×3</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e3s">15 reps bridge / 20 reps clamshell per side</div>
         </div>
         <div class="exo-detail" id="d3">
           <ul>
@@ -405,14 +408,14 @@
       <!-- THU 1 -->
       <div class="seance-row cardio-row" data-day="4" onclick="toggleDetail('d4')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-c" data-i18n="pill_thu">THU · HIIT</span><span data-i18n="e4n">Tabata circuit: 20s work / 10s rest</span></div>
-            <div class="exo-sub" data-i18n="e4s">8 exercises × 5 rounds = 20 min</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge c-sets">×5</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge c-sets">×5</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e4s">8 exercises × 5 rounds = 20 min</div>
         </div>
         <div class="exo-detail" id="d4">
           <ul>
@@ -431,14 +434,14 @@
       <!-- THU 2 -->
       <div class="seance-row cardio-row" data-day="4" onclick="toggleDetail('d5')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-c" data-i18n="pill_thu">THU · HIIT</span><span data-i18n="e5n">Finish: plank 1 min + 20 bicycle crunches</span></div>
-            <div class="exo-sub" data-i18n="e5s">Back to back, no rest · core finisher</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge c-sets">×2</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge c-sets">×2</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e5s">Back to back, no rest · core finisher</div>
         </div>
         <div class="exo-detail" id="d5">
           <ul>
@@ -451,14 +454,14 @@
       <!-- FRI 1 -->
       <div class="seance-row strength-row" data-day="5" onclick="toggleDetail('d6')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_fri">FRI · CORE</span><span data-i18n="e6n">Dead bug 10 reps/side + Plank 40s</span></div>
-            <div class="exo-sub" data-i18n="e6s">No rest between · deep transverse ab work</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×4</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×4</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e6s">No rest between · deep transverse ab work</div>
         </div>
         <div class="exo-detail" id="d6">
           <ul>
@@ -472,14 +475,14 @@
       <!-- FRI 2 -->
       <div class="seance-row strength-row" data-day="5" onclick="toggleDetail('d7')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_fri">FRI · CORE</span><span data-i18n="e7n">Leg raises + Reverse crunches</span></div>
-            <div class="exo-sub" data-i18n="e7s">15 + 15 reps · lower abs focus</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×4</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×4</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e7s">15 + 15 reps · lower abs focus</div>
         </div>
         <div class="exo-detail" id="d7">
           <ul>
@@ -493,14 +496,14 @@
       <!-- FRI 3 -->
       <div class="seance-row strength-row" data-day="5" onclick="toggleDetail('d8')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_fri">FRI · CORE</span><span data-i18n="e8n">Side plank 30s/side + Scissors 20 reps</span></div>
-            <div class="exo-sub" data-i18n="e8s">Obliques + lower belly · 1 min rest</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×3</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×3</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e8s">Obliques + lower belly · 1 min rest</div>
         </div>
         <div class="exo-detail" id="d8">
           <ul>
@@ -514,14 +517,14 @@
       <!-- SAT warm-up -->
       <div class="seance-row yellow-row" data-day="6" onclick="toggleDetail('d9')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-y2" data-i18n="pill_sat_w">SAT · WARM-UP</span><span data-i18n="e9n">5 min warm-up: brisk walk + joint rotations</span></div>
-            <div class="exo-sub" data-i18n="e9s">Essential in the morning before any effort</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge yy-sets">5 min</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge yy-sets">5 min</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e9s">Essential in the morning before any effort</div>
         </div>
         <div class="exo-detail" id="d9">
           <ul>
@@ -535,14 +538,14 @@
       <!-- SAT HIIT -->
       <div class="seance-row yellow-row" data-day="6" onclick="toggleDetail('d10')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-y2" data-i18n="pill_sat_h">SAT · HIIT</span><span data-i18n="e10n">Intense circuit: Squat jump + Burpee + Jump lunge</span></div>
-            <div class="exo-sub" data-i18n="e10s">45s work / 15s rest · 5 rounds · ~200 kcal</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge yy-sets">×5</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge yy-sets">×5</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e10s">45s work / 15s rest · 5 rounds · ~200 kcal</div>
         </div>
         <div class="exo-detail" id="d10">
           <ul>
@@ -556,14 +559,14 @@
       <!-- SAT glutes -->
       <div class="seance-row strength-row" data-day="6" onclick="toggleDetail('d11')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-s" data-i18n="pill_sat_g">SAT · GLUTES</span><span data-i18n="e11n">Finish: Hip thrust ×20 + Kickback ×15/side</span></div>
-            <div class="exo-sub" data-i18n="e11s">Back to back · finish the session strong</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge">×3</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge">×3</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e11s">Back to back · finish the session strong</div>
         </div>
         <div class="exo-detail" id="d11">
           <ul>
@@ -577,14 +580,14 @@
       <!-- SUN -->
       <div class="seance-row yoga-row" data-day="0" onclick="toggleDetail('d12')">
         <div class="row-top">
-          <div>
+          <div class="row-top-header">
             <div class="exo-name"><span class="type-pill pill-y" data-i18n="pill_sun">SUN · MOBILITY</span><span data-i18n="e12n">Yoga · Acro yoga · Bike 🚲</span></div>
-            <div class="exo-sub" data-i18n="e12s">Choose what feels right that day</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              <div class="sets-badge y-sets">~</div>
+              <button class="expand-btn" data-i18n="btn_open">+ Details</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <div class="sets-badge y-sets">~</div>
-            <button class="expand-btn" data-i18n="btn_open">+ Details</button>
-          </div>
+          <div class="exo-sub" data-i18n="e12s">Choose what feels right that day</div>
         </div>
         <div class="exo-detail" id="d12">
           <ul>
