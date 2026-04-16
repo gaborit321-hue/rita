@@ -84,6 +84,8 @@
   .week-row-bot { grid-template-columns:repeat(3,1fr); width:75%; margin:0 auto; }
   .day-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:12px 8px; text-align:center; transition:border-color .2s; position:relative; }
   .day-card:hover { border-color:var(--border2); }
+  .day-card.today-card { border:2px solid var(--accent); box-shadow:0 0 0 3px var(--accent-bg); }
+  .day-card.vienne-day.today-card { border:2px solid var(--vienne); box-shadow:0 0 0 3px rgba(124,58,237,0.10); }
   .day-card.vienne-day { border-top:2px solid var(--vienne); }
   .day-card.yellow-day { border-top:2px solid var(--yellow); }
   .vienne-tag { font-family:'DM Mono',monospace; font-size:8px; color:var(--vienne); letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px; opacity:.8; }
@@ -167,7 +169,8 @@
 
 
   /* EXPAND / COLLAPSE */
-  .seance-row { cursor:pointer; align-items:start; display:block !important; }
+  .seance-row { cursor:pointer; align-items:start; display:block; }
+  .seance-row.hidden-day { display:none !important; }
   .seance-row .row-top { display:flex; flex-direction:column; gap:6px; width:100%; }
   .row-top-header { display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .row-top-header .sets-badge { font-size:18px; flex-shrink:0; }
@@ -188,7 +191,6 @@
 
   /* TODAY FILTER */
   #today-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .seance-row.hidden-day { display:none; }
   .section-label { justify-content:flex-start; }
 
   /* DAY DRAWER */
@@ -293,39 +295,39 @@
     <div class="section-label" data-i18n="sec_planning">Weekly schedule</div>
     <div class="week-grid">
       <div class="week-row week-row-top">
-        <div class="day-card" onclick="openDayDrawer('mon')" style="cursor:pointer;">
+        <div class="day-card" onclick="openDayDrawer('mon')" data-weekday="1" style="cursor:pointer;">
           <div class="day-name" data-i18n="day_mon">Mon</div>
           <div class="day-badge badge-strength" data-i18n="badge_glutes">Glute strength</div>
           <div class="day-note" data-i18n="note_mon">Evening · 25 min</div>
         </div>
-        <div class="day-card vienne-day" onclick="openDayDrawer('tue')" style="cursor:pointer;">
+        <div class="day-card vienne-day" onclick="openDayDrawer('tue')" data-weekday="2" style="cursor:pointer;">
           <div class="day-name"><span data-i18n="day_tue">Tue</span> <span class="vienne-inline" data-i18n="vienne_tag">🚄 Vienna</span></div>
           <div class="day-badge badge-rest" data-i18n="badge_recovery">Active recovery</div>
           <div class="day-note" data-i18n="note_tue">Walk · no workout</div>
         </div>
-        <div class="day-card vienne-day" onclick="openDayDrawer('wed')" style="cursor:pointer;">
+        <div class="day-card vienne-day" onclick="openDayDrawer('wed')" data-weekday="3" style="cursor:pointer;">
           <div class="day-name"><span data-i18n="day_wed">Wed</span> <span class="vienne-inline" data-i18n="vienne_tag">🚄 Vienna</span></div>
           <div class="day-badge badge-rest" data-i18n="badge_recovery">Active recovery</div>
           <div class="day-note" data-i18n="note_wed">Walk · no workout</div>
         </div>
-        <div class="day-card" onclick="openDayDrawer('thu')" style="cursor:pointer;">
+        <div class="day-card" onclick="openDayDrawer('thu')" data-weekday="4" style="cursor:pointer;">
           <div class="day-name" data-i18n="day_thu">Thu</div>
           <div class="day-badge badge-cardio" data-i18n="badge_hiit">HIIT cardio</div>
           <div class="day-note" data-i18n="note_thu">Morning or evening · 20 min</div>
         </div>
       </div>
       <div class="week-row week-row-bot">
-        <div class="day-card" onclick="openDayDrawer('fri')" style="cursor:pointer;">
+        <div class="day-card" onclick="openDayDrawer('fri')" data-weekday="5" style="cursor:pointer;">
           <div class="day-name" data-i18n="day_fri">Fri</div>
           <div class="day-badge badge-strength" data-i18n="badge_core">Core strength</div>
           <div class="day-note" data-i18n="note_fri">Evening · 25 min</div>
         </div>
-        <div class="day-card" onclick="openDayDrawer('sat')" style="cursor:pointer;">
+        <div class="day-card" onclick="openDayDrawer('sat')" data-weekday="6" style="cursor:pointer;">
           <div class="day-name" data-i18n="day_sat">Sat</div>
           <div class="day-badge badge-yellow" data-i18n="badge_sat">HIIT + Glutes</div>
           <div class="day-note" data-i18n="note_sat">Morning · 30 min ⭐</div>
         </div>
-        <div class="day-card" onclick="openDayDrawer('sun')" style="cursor:pointer;">
+        <div class="day-card" onclick="openDayDrawer('sun')" data-weekday="0" style="cursor:pointer;">
           <div class="day-name" data-i18n="day_sun">Sun</div>
           <div style="display:flex;flex-direction:column;gap:4px;width:100%;">
             <div class="day-badge badge-yoga" style="font-size:10px;padding:4px 6px;" data-i18n="badge_sun_yoga">Yoga</div>
@@ -339,7 +341,7 @@
   </section>
 
   <section>
-    <div class="section-label" style="justify-content:space-between;" data-i18n="sec_sessions">Session details<button id="today-btn" onclick="toggleTodayFilter()" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-bg);border:1px solid rgba(181,55,122,.3);border-radius:5px;color:var(--accent);padding:4px 10px;cursor:pointer;transition:all .18s;font-weight:600;margin-left:auto;" data-i18n="btn_today">Today only</button></div>
+    <div class="section-label" data-i18n="sec_sessions">Session details</div>
     <div id="rest-day-msg" style="display:none;background:var(--rest-bg);border:1px solid rgba(90,86,104,.18);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--rest);font-family:'DM Mono',monospace;letter-spacing:.04em;" data-i18n="msg_rest">Rest day — no workout today 🌿</div>
     <div class="seance-grid">
       <!-- MON 1 -->
@@ -818,25 +820,20 @@ hu:{lang_label:"Nyelv",tagline1:"Test & Energia",tagline2:"Fogyás · Tónusnöv
 };
 
 
-let todayFilterOn = true;
-function toggleTodayFilter() {
-  todayFilterOn = !todayFilterOn;
-  const btn = document.getElementById('today-btn');
-  btn.classList.toggle('active', todayFilterOn);
-  applyTodayFilter();
-}
 function applyTodayFilter() {
   const today = new Date().getDay(); // 0=Sun,1=Mon,...,6=Sat
   const restDays = [2, 3]; // Tue, Wed = Vienna days
   const rows = document.querySelectorAll('.seance-row[data-day]');
   const restMsg = document.getElementById('rest-day-msg');
   const grid = document.querySelector('.seance-grid');
-  if (!todayFilterOn) {
-    rows.forEach(r => r.classList.remove('hidden-day'));
-    restMsg.style.display = 'none';
-    grid.style.display = '';
-    return;
-  }
+
+  // Always highlight today card in weekly schedule
+  document.querySelectorAll('.day-card[data-weekday]').forEach(card => {
+    const wd = parseInt(card.getAttribute('data-weekday'));
+    card.classList.toggle('today-card', wd === today);
+  });
+
+  // Always filter sessions to today only
   const isRest = restDays.includes(today);
   if (isRest) {
     rows.forEach(r => r.classList.add('hidden-day'));
@@ -1078,7 +1075,7 @@ function setLang(lang) {
     if (b && body) b.textContent = body.style.display !== 'none' ? (d.btn_close||'− Close') : (d.btn_open||'+ Details');
   });
   // update today btn
-  const tb = document.getElementById('today-btn'); if(tb) tb.textContent = d.btn_today||'Today only';
+
   // update expand button texts for current open state
   document.querySelectorAll('.exo-detail').forEach(el => {
     const btn = el.previousElementSibling && el.previousElementSibling.querySelector ? el.previousElementSibling.querySelector('.expand-btn') : null;
@@ -1091,8 +1088,6 @@ function setLang(lang) {
 // Init on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
   setLang('en');
-  const btn = document.getElementById('today-btn');
-  if (btn) btn.classList.add('active');
   applyTodayFilter();
 });
 </script>
