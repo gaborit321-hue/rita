@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Program">
-<link rel="apple-touch-icon" sizes="512x512" href="icon2.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icon2.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0eff4">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -252,7 +252,7 @@
 
 <div class="page-wrap">
 <header>
-  <div class="header-title">RITA'S<br><span>PROGRAMME</span></div>
+  <div class="header-title"><span onclick="easterEgg()" style="cursor:default;user-select:none;">RITA'S</span><br><span>PROGRAMME</span></div>
   <div class="header-sub">
     <span data-i18n="tagline1">Body & Energy</span><br>
     <span data-i18n="tagline2">Weight loss · Toning</span><br>
@@ -1091,6 +1091,16 @@ function setLang(lang) {
     }
   });
 }
+
+function easterEgg() {
+  const o = document.getElementById('egg-overlay');
+  o.style.display = 'flex';
+}
+function closeEgg() {
+  const o = document.getElementById('egg-overlay');
+  o.style.display = 'none';
+}
+
 // Init on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
   setLang('en');
@@ -1128,6 +1138,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="drawer-content"></div>
   </div>
 </div>
+
+
+<!-- EASTER EGG -->
+<div id="egg-overlay" onclick="closeEgg()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:center;justify-content:center;animation:eggFade .3s ease both;">
+  <img src="icon.png" style="width:220px;height:220px;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:eggPop .35s cubic-bezier(.34,1.56,.64,1) both;" alt="">
+</div>
+<style>
+  @keyframes eggFade { from{opacity:0} to{opacity:1} }
+  @keyframes eggPop  { from{opacity:0;transform:scale(.5)} to{opacity:1;transform:scale(1)} }
+</style>
 
 </body>
 </html>
