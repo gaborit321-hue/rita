@@ -1,4 +1,4 @@
-const VERSION = '1.8';
+const VERSION = '1.9';
 const CACHE_NAME = 'program-rita-v' + VERSION;
 const ASSETS = [
   '/rita/',
